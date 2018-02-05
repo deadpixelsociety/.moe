@@ -1,33 +1,109 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.thedeadpixelsociety.moe"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs += ["src/main/kotlin "]
+        }
+    }
+}
+
+ext {
+    android_constraint_version = '1.0.2'
+    android_espresso_version = '3.0.1'
+    android_junit_version = '4.12'
+    android_support_version = '27.0.2'
+    android_test_runner_version = '1.0.1'
+    auto_parcel_version = '1.0.3'
+    auto_value_version = '1.5'
+    findbugs_version = '2.0.1'
+    flow_version = '1.0.0-alpha3'
+    glide_version = '4.6.1'
+    guava_version = '23.0-android'
+    kodein_version = '3.4.1'
+    retrofit_version = '2.3.0'
+    rxandroid_version = '2.0.1'
+    rxbinding_version = '2.1.0'
+    rxjava_version = '2.1.9'
+    rxkotlin_version = '2.2.0'
+    store_version = '3.0.0'
+    timber_version = '4.6.0'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    // Test
+    testImplementation "junit:junit:$android_junit_version"
+    androidTestImplementation "com.android.support.test:runner:$android_test_runner_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$android_espresso_version"
+
+    // Support
+    implementation "com.android.support:appcompat-v7:$android_support_version"
+    implementation "com.android.support:design:$android_support_version"
+    implementation "com.android.support:recyclerview-v7:$android_support_version"
+    implementation "com.android.support:cardview-v7:$android_support_version"
+    implementation "com.android.support.constraint:constraint-layout:$android_constraint_version"
+
+    // Injection
+    implementation "com.github.salomonbrys.kodein:kodein:$kodein_version"
+
+    // Data
+    implementation "com.nytimes.android:store3:$store_version"
+    implementation "com.nytimes.android:middleware3:$store_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+
+    // Reactive
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxbinding_version"
+    implementation "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:$rxbinding_version"
+    implementation "com.jakewharton.rxbinding2:rxbinding-design:$rxbinding_version"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rxbinding_version"
+
+    // Images
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+    // Navigation
+    implementation "com.squareup.flow:flow:$flow_version"
+
+    // Logging
+    implementation "com.jakewharton.timber:timber:$timber_version"
+
+    // Parcel
+    kapt "frankiesardo:auto-parcel:$auto_parcel_version"
+    compileOnly "com.google.auto.value:auto-value:$auto_value_version"
+    annotationProcessor "com.google.auto.value:auto-value:$auto_value_version"
 }

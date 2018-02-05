@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">.moe</string>
+    <string name="browse">Browse</string>
+    <string name="updated">Updated</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="released">Released: %1$s</string>
+    <string name="status">Status: %1$s</string>
+    <string name="search_anime">Search Anime</string>
 </resources>
